@@ -1,0 +1,36 @@
+-- Create table
+create table TASK_TBL
+(
+  id               NUMBER generated always as identity,
+  executed         CLOB,
+  nao_conformidade NUMBER,
+  obs              CLOB
+)
+
+
+
+-- PACKAGE HEAD --
+create or replace package wk_req_wbs_execute is
+
+  -- Author  : A.ORIPOV
+  -- Created : 11/4/2020 11:15:27 AM
+  -- Purpose : 
+
+  procedure wbs_execute(p_executed IN CLOB, p_nao_conform IN NUMBER, p_obs IN CLOB);
+
+end wk_req_wbs_execute;
+
+
+
+-- PACKAGE BODY --
+create or replace package body wk_req_wbs_execute is
+
+  procedure wbs_execute(p_executed IN CLOB, p_nao_conform IN NUMBER, p_obs IN CLOB) IS
+  begin
+    INSERT INTO TASK_TBL
+      (Executed, Nao_Conformidade, Obs)
+    VALUES
+      (p_executed, p_nao_conform, p_obs);
+  end;
+
+end wk_req_wbs_execute;
